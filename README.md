@@ -1,1 +1,1 @@
-# simply-todo
+# Simply-todo web application
