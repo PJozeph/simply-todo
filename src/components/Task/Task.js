@@ -14,8 +14,7 @@ const Task = (props) => {
     const dispatch = useDispatch();
 
     const taskChangeHandler = (taskId) => {
-        console.log("taskChangeHandler" + taskId)
-        // dispatch(updateTask(taskId))
+        dispatch(todoActions.markItemCompleted(taskId))
     }
 
     return (

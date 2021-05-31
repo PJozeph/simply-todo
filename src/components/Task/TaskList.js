@@ -5,11 +5,11 @@ const TaskList = (props) => {
     return (
         <div>
             <ul>
-                {props.tasks.map((task) => {
+                {props.tasks.filter(task => task.isCompleted === false).map((task) => {
                     return <Task key={task.id}
-                            text={task.text}
-                            isCompleted={task.isCompleted}
-                            taskId={task.id} />
+                        text={task.text}
+                        isCompleted={task.isCompleted}
+                        taskId={task.id} />
                 })}
             </ul>
         </div>
