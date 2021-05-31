@@ -11,7 +11,6 @@ const Container = Style.div`
     margin: auto;
     width: 500px;
 `
-
 const Input = () => {
 
     const [enteredTask, setEnteredTask] = useState('');
@@ -39,9 +38,9 @@ const Input = () => {
         setEnteredTask("")
     }
 
-    let controlPanel = null;
+    let buttons = (<div style={{height:'60px'}}></div>);
     if (!isInputEmpty) {
-        controlPanel = (<div style={{ marginRight: 'auto', order: '2', padding: '5px' }} >
+        buttons = (<div style={{ marginRight: 'auto', order: '2', padding: '5px' }} >
             <button style={{ width: "100px", margin: '5px' }}
                 className="btn btn-outline-primary"
                 disabled={isInputEmpty}
@@ -68,7 +67,7 @@ const Input = () => {
                     value={enteredTask}
                     ref={enteredTaskInput} />
             </div>
-            {controlPanel}
+            {buttons}
         </Container>)
 }
 
