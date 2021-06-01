@@ -2,7 +2,7 @@ import Style from "styled-components";
 import { useState, useRef, useEffect } from "react";
 
 import { useDispatch } from "react-redux";
-import { todoActions, sendTask } from "../../store/todoReducer"
+import { addNewTask } from "../../store/todoReducer"
 
 const Container = Style.div`
     display: flex;
@@ -30,7 +30,7 @@ const Input = () => {
     }
 
     const addTaskHandler = () => {
-        dispatch(sendTask(enteredTask));
+        dispatch(addNewTask({text: enteredTask, isCompleted: false}));
         setEnteredTask('')
     }
 

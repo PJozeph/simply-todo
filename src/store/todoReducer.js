@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, create, createAsyncThunk } from '@reduxjs/toolkit';
 
 import axios from "axios"
 
@@ -9,13 +9,16 @@ const initialState = {
         { id: '2', text: 'meet Fanni ', isCompleted: false }],
 };
 
-export const sendTask = (task) => async (dispatch) => {
-    await axios.post('https://simply-todo-fd648-default-rtdb.europe-west1.firebasedatabase.app/tasks.json', {
-        text: task,
-        isCompleted: false
-    })
-        .then(response => { console.log(response.data) })
-}
+export const addNewTask = createAsyncThunk(
+    'task/addNewTask',
+    async task => {
+      const response = await axios.post('https://simply-todo-fd648-default-rtdb.europe-west1.firebasedatabase.app/tasks.json',
+      { ...task }
+      ).then(response => { return {...task, id: response.data['name']}
+        })
+      return response
+    }
+  )
 
 const todoSlice = createSlice({
     name: 'todoReducer',
@@ -32,9 +35,14 @@ const todoSlice = createSlice({
             const itemIndex = state.tasks.findIndex(item => item.id === action.payload);
             state.tasks[itemIndex].isCompleted = true;
         },
+    },
+    extraReducers : {
+        [addNewTask.fulfilled] : (state, action) => {
+            console.log(action.payload)
+            state.tasks.push(action.payload);
+        }
     }
 })
 
 export const todoActions = todoSlice.actions;
-
 export default todoSlice.reducer;
