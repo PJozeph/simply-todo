@@ -1,3 +1,4 @@
+import {Link as NavLink} from "react-router-dom"
 
 const Header = () => {
 
@@ -5,16 +6,16 @@ const Header = () => {
         <header>
             <ul className="nav justify-content-end">
                 <li className="nav-item">
-                    <a className="nav-link active" href="#">Active</a>
+                    <NavLink className="nav-link active" to="/login">Login</NavLink>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">Link</a>
+                    <NavLink className="nav-link active" to="#">Logout</NavLink>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">Link</a>
+                    <NavLink className="nav-link" to="#">Completed Tasks</NavLink>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link disabled" href="#">Disabled</a>
+                    <NavLink className="nav-link" to="#">Profile</NavLink>
                 </li>
             </ul>
         </header>)

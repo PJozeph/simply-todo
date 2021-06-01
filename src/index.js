@@ -6,11 +6,14 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom"
 import store from "./store/index"
 
 const Main = (
   <Provider store={store}>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>
 )
 
