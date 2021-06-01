@@ -20,7 +20,7 @@ const TaskList = () => {
     return (
         <div>
             <ul>
-                {tasksList.map((task) => {
+                {tasksList.filter(task => task.isCompleted === false).map((task) => {
                     return <Task key={task.id}
                         text={task.text}
                         isCompleted={task.isCompleted}

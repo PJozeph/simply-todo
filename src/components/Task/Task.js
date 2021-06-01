@@ -21,7 +21,7 @@ const Task = (props) => {
             <div className="card" style={{ width: '26rem', margin: '7px' }}>
                 <div className="card-body">
                     {props.text}
-                    <input className="form-check-input"
+                    <input className="form-check-input" onFocus='active'
                         type="checkbox"
                         checked={props.isCompleted}
                         onChange={() => taskChangeHandler(props.taskId, props.text, !props.isCompleted)}
