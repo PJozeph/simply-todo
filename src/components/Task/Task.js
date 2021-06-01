@@ -1,6 +1,6 @@
 import Style from "styled-components";
 import { useDispatch } from "react-redux";
-import { todoActions } from "../../store/todoReducer"
+import { markTaskCompleted } from "../../store/taskReducer"
 
 const Container = Style.div`
     display: flex;
@@ -12,8 +12,8 @@ const Task = (props) => {
 
     const dispatch = useDispatch();
 
-    const taskChangeHandler = (taskId) => {
-        dispatch(todoActions.markItemCompleted(taskId))
+    const taskChangeHandler = (taskId, text, isCompleted) => {
+        dispatch(markTaskCompleted({id:taskId, text, isCompleted}))
     }
 
     return (
@@ -24,7 +24,7 @@ const Task = (props) => {
                     <input className="form-check-input"
                         type="checkbox"
                         checked={props.isCompleted}
-                        onChange={() => taskChangeHandler(props.taskId)}
+                        onChange={() => taskChangeHandler(props.taskId, props.text, !props.isCompleted)}
                         style={{ float: 'right' }} />
                 </div>
             </div>

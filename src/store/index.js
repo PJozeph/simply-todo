@@ -1,10 +1,10 @@
 
 import { configureStore } from '@reduxjs/toolkit'
-import todoReducer from './todoReducer'
+import taskReducer from './taskReducer'
 
 const store = configureStore({
   reducer: {
-    todo: todoReducer
+    todo: taskReducer
   },
 });
 

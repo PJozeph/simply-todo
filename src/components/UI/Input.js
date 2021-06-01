@@ -2,7 +2,7 @@ import Style from "styled-components";
 import { useState, useRef, useEffect } from "react";
 
 import { useDispatch } from "react-redux";
-import { addNewTask } from "../../store/todoReducer"
+import { addNewTask } from "../../store/taskReducer"
 
 const Container = Style.div`
     display: flex;
