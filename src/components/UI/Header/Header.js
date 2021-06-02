@@ -1,22 +1,30 @@
-import {Link as NavLink} from "react-router-dom"
+import { Link as NavLink } from "react-router-dom";
+
+import { useSelector } from "react-redux";
 
 const Header = () => {
+
+    const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
 
     return (
         <header>
             <ul className="nav justify-content-end">
-                <li className="nav-item">
-                    <NavLink className="nav-link active" to="/login">Login</NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink className="nav-link active" to="#">Logout</NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink className="nav-link" to="#">Completed Tasks</NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink className="nav-link" to="#">Profile</NavLink>
-                </li>
+                {!isLoggedIn &&
+                    <li className="nav-item">
+                        <NavLink className="nav-link active" to="/login">Login</NavLink>
+                    </li>}
+                {isLoggedIn &&
+                    <li className="nav-item">
+                        <NavLink className="nav-link active" to="#">Logout</NavLink>
+                    </li>}
+                {isLoggedIn &&
+                    <li className="nav-item">
+                        <NavLink className="nav-link" to="#">Completed Tasks</NavLink>
+                    </li>}
+                {isLoggedIn &&
+                    <li className="nav-item">
+                        <NavLink className="nav-link" to="#">Profile</NavLink>
+                    </li>}
             </ul>
         </header>)
 }
