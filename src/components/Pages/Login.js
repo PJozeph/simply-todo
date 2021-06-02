@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 
 import { useDispatch } from "react-redux";
 
-import { signUp } from "../../store/authReducer";
+import { signUp, signIn } from "../../store/authReducer";
 
 const Login = () => {
 
@@ -12,9 +12,7 @@ const Login = () => {
     const dispatch = useDispatch()
 
     const isSignUpHandler = () => {
-        setIsSignUp((prevState) => {
-            return !prevState;
-        })
+        setIsSignUp((prevState) => { return !prevState })
     }
 
     const onSignHandler = event => {
@@ -23,7 +21,7 @@ const Login = () => {
         if (isSignUp) {
             dispatch(signUp({ email: emailInputRef.current.value, password: passwordInputRef.current.value }))
         } else {
-
+            dispatch(signIn({ email: emailInputRef.current.value, password: passwordInputRef.current.value }))
         }
     }
 
