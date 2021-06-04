@@ -14,7 +14,7 @@ const Container = Style.div`
 const Input = () => {
 
     const [enteredTask, setEnteredTask] = useState('');
-    const [isInputEmpty, seIsInputIsEmpty] = useState(false);
+    const [isInputEmpty, seIsInputIsEmpty] = useState(true);
 
     const enteredTaskInput = useRef('');
 

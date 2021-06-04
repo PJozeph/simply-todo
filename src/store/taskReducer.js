@@ -32,7 +32,7 @@ export const markTaskCompleted = createAsyncThunk(
 
 export const getAllTask = createAsyncThunk(
     'task/getAllTask',
-    async () => {
+    async (token) => {
         const response = await axios.get('https://simply-todo-fd648-default-rtdb.europe-west1.firebasedatabase.app/tasks.json')
             .then(response => {
                 const result = []
