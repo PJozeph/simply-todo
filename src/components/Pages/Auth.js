@@ -38,11 +38,15 @@ const Login = () => {
                 password: passwordInputRef.current.value,
                 returnSecureToken: true
             })
-            .then(response => {
-                const expirationTime = new Date(new Date().getTime() + (+response.data.expiresIn * 1000));
-                const token = response.data.idToken;
-                authContext.login(token, expirationTime);
-                history.push("/")
+            .then(res => {
+                const expirationTime = new Date(new Date().getTime() + (+res.data.expiresIn * 1000));
+                const token = res.data.idToken;
+                const refreshToken = res.data.refreshToken;
+                axios.post("https://securetoken.googleapis.com/v1/token?key=AIzaSyDSg1JotvDnX0S3_o1ZgkmtN_SAu0sNuM0&grant_type=refresh_token&refresh_token="+refreshToken)
+                .then(response => {
+                    authContext.login(token, expirationTime, response.data.user_id);
+                    history.push("/")
+                });
             });
     }
 
@@ -50,12 +54,12 @@ const Login = () => {
         <Container>
             <form onSubmit={onSignHandler}>
                 <div className="mb-3">
-                    <label for="exampleInputEmail1" className="form-label">Email address</label>
+                    <label className="form-label">Email address</label>
                     <input type="email" className="form-control" ref={emailInputRef} />
                     <div className="form-text">We'll never share your email with anyone else.</div>
                 </div>
                 <div className="mb-3">
-                    <label for="exampleInputPassword1" className="form-label">Password</label>
+                    <label className="form-label">Password</label>
                     <input type="password" className="form-control" ref={passwordInputRef} />
                 </div>
                 <div className="mb-3" style={{ display: 'flex', justifyItems: 'center', justifyContent: 'center' }}>
@@ -67,7 +71,7 @@ const Login = () => {
                 <hr />
                 <div className="mb-3" style={{ display: 'flex', justifyItems: 'center', justifyContent: 'center' }}>
                     <button type="button"
-                        class="btn btn-outline-success"
+                        className="btn btn-outline-success"
                         onClick={isSignUpHandler}>{!isSignUp ? 'Create Account' : 'Use Account'}</button>
                 </div>
             </form>

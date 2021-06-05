@@ -16,12 +16,11 @@ const TaskList = (props) => {
     const dispatch = useDispatch();
 
     const token = context.token;
-    console.log(token)
-
+    const userId = context.userId;
     const tasksList = useSelector(state => state.todo.tasks)
 
     useEffect(() => {
-        dispatch(getAllTask(token))
+        dispatch(getAllTask({token, userId}))
     }, [tasks])
 
     let filterFunk = (task => task.isCompleted === false);

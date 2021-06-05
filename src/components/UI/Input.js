@@ -1,8 +1,10 @@
 import Style from "styled-components";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 
 import { useDispatch } from "react-redux";
 import { addNewTask } from "../../store/taskReducer"
+
+import AuthContext from "../../store/authStore";
 
 const Container = Style.div`
     display: flex;
@@ -20,6 +22,10 @@ const Input = () => {
 
     const dispatch = useDispatch();
 
+    const context = useContext(AuthContext);
+
+    const userId = context.userId;
+
     useEffect(() => {
         enteredTask.length === 0 ? seIsInputIsEmpty(true) : seIsInputIsEmpty(false);
     }, [enteredTask])
@@ -30,7 +36,7 @@ const Input = () => {
     }
 
     const addTaskHandler = () => {
-        dispatch(addNewTask({text: enteredTask, isCompleted: false}));
+        dispatch(addNewTask({text: enteredTask, isCompleted: false, userId}));
         setEnteredTask('')
     }
 

@@ -6,6 +6,7 @@ let logoutTimer;
 const AuthContext = React.createContext({
     token: '',
     isLoggedIn: '',
+    userId: '',
     login: (token) => { },
     logout: () => { }
 });
@@ -19,6 +20,7 @@ const calculatingRemainingTime = (expirationTime) => {
 const getToken = () => {
     const storedToken = localStorage.getItem("token");
     const expirationTime = localStorage.getItem("expirationTime");
+    const userId = localStorage.getItem("userId");
     const remainingTime = calculatingRemainingTime(expirationTime);
     if (remainingTime <= 0) {
         localStorage.removeItem("token")
@@ -27,7 +29,8 @@ const getToken = () => {
     }
     return {
         token: storedToken,
-        duration: remainingTime
+        duration: remainingTime,
+        userId: userId
     }
 }
 
@@ -39,20 +42,32 @@ export const AuthContextProvider = (props) => {
         initialToken = tokenData.token
     }
     const [token, setToken] = useState(initialToken);
+
+
+    let initialUserId;
+    if (tokenData) {
+        initialUserId = tokenData.userId
+    }
+    const [userId, setUserId] = useState(initialUserId);
+
     const userIsLoggedIn = !!token;
     const logoutHandler = () => {
-        setToken(null)
+        setToken(null);
+        setUserId(null);
         localStorage.removeItem("token");
         localStorage.removeItem("expirationTime");
+        localStorage.removeItem("userId");
         if (logoutTimer) {
             clearTimeout(logoutTimer)
         }
     }
 
-    const loginHandler = (token, expirationTime) => {
+    const loginHandler = (token, expirationTime, userId) => {
         setToken(token);
+        setUserId(userId);
         localStorage.setItem("token", token);
         localStorage.setItem("expirationTime", expirationTime);
+        localStorage.setItem("userId", userId)
         logoutTimer = setTimeout(logoutHandler, calculatingRemainingTime(expirationTime))
     }
 
@@ -65,6 +80,7 @@ export const AuthContextProvider = (props) => {
     const context = {
         token: token,
         isLoggedIn: userIsLoggedIn,
+        userId : userId,
         login: loginHandler,
         logout: logoutHandler
     }
