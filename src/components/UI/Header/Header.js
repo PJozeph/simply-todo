@@ -4,6 +4,10 @@ import AuthContext from "../../../store/authStore";
 import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 
+import Stlye from "styled-components";
+
+const Container = Stlye.header``
+
 const Header = () => {
 
     const authContext = useContext(AuthContext);

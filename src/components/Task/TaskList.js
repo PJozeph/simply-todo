@@ -9,6 +9,16 @@ import { useSelector } from "react-redux";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import Style from "styled-components";
+
+const Container = Style.div`
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: auto;
+`
+
+
 const TaskList = (props) => {
 
     const context = useContext(AuthContext);
@@ -20,16 +30,17 @@ const TaskList = (props) => {
     const tasksList = useSelector(state => state.todo.tasks)
 
     useEffect(() => {
-        dispatch(getAllTask({token, userId}))
+        dispatch(getAllTask({ token, userId }))
     }, [tasks])
 
     let filterFunk = (task => task.isCompleted === false);
 
-    if(props.isCompleted) {
+    if (props.isCompleted) {
         filterFunk = (task => task.isCompleted === true);
     }
 
     return (
+        <Container>
             <ul>
                 {tasksList.filter(filterFunk).map((task) => {
                     return <Task key={task.id}
@@ -38,6 +49,7 @@ const TaskList = (props) => {
                         taskId={task.id} />
                 })}
             </ul>
+        </Container>
     )
 }
 
