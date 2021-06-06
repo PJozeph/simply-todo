@@ -60,7 +60,7 @@ const Login = () => {
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Password</label>
-                    <input type="password" className="form-control" ref={passwordInputRef} />
+                    <input type="password" className="form-control" minLength="7" ref={passwordInputRef} />
                 </div>
                 <div className="mb-3" style={{ display: 'flex', justifyItems: 'center', justifyContent: 'center' }}>
                     <button

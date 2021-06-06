@@ -24,6 +24,7 @@ const Input = () => {
 
     const context = useContext(AuthContext);
 
+    const isLoggedId = context.isLoggedIn;
     const userId = context.userId;
 
     useEffect(() => {
@@ -60,8 +61,16 @@ const Input = () => {
         </div>);
     }
 
+    let signInMessage = null;
+    if(!isLoggedId) {
+        signInMessage = (<div class="alert alert-info" role="alert">
+                             Signin to create your own tasks!
+                        </div>)
+    }
+
     return (
         <Container>
+            {signInMessage}
             <div className="input-group" style={{ padding: '7px' }}>
                 <div className="input-group-prepend">
                     <span className="input-group-text">Create new task</span>
