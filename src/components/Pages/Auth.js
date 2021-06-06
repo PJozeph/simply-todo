@@ -28,7 +28,7 @@ const Login = () => {
         event.preventDefault();
         let url;
         if (isSignUp) {
-            url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUps?key=AIzaSyDSg1JotvDnX0S3_o1ZgkmtN_SAu0sNuM0'
+            url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDSg1JotvDnX0S3_o1ZgkmtN_SAu0sNuM0'
         } else {
             url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDSg1JotvDnX0S3_o1ZgkmtN_SAu0sNuM0'
         }

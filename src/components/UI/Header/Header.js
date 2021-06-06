@@ -16,7 +16,7 @@ const Header = () => {
     }
 
     return (
-        <header>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <ul className="nav justify-content-end">
                 {isLoggedIn &&
                     <li className="nav-item">
@@ -24,18 +24,18 @@ const Header = () => {
                     </li>}
                 {isLoggedIn &&
                     <li className="nav-item">
-                        <Link className="nav-link" to="/completed">Completed Tasks</Link>
+                        <Link className="nav-link" to="/completed">Completed Todo</Link>
                     </li>}
                 {isLoggedIn &&
                     <li className="nav-item">
-                        <Link className="nav-link" to="/">Profile</Link>
+                        <Link className="nav-link" to="/">Todos</Link>
                     </li>}
                 {!isLoggedIn &&
                     <li className="nav-item">
                         <Link className="nav-link active" to="/login">Login</Link>
                     </li>}
             </ul>
-        </header>)
+        </nav>)
 }
 
 export default Header;
