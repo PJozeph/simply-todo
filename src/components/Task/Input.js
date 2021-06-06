@@ -1,18 +1,16 @@
-import Style from "styled-components";
 import { useState, useRef, useEffect, useContext } from "react";
 
 import { useDispatch } from "react-redux";
 import { addNewTask } from "../../store/taskReducer"
 
 import AuthContext from "../../store/authStore";
+import React from "react";
+
+import Style from "styled-components";
 
 const Container = Style.div`
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin: auto;
-    width: 500px;
 `
+
 const Input = () => {
 
     const [enteredTask, setEnteredTask] = useState('');

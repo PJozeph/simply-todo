@@ -22,8 +22,7 @@ const Task = (props) => {
     }
 
     return (
-        <Container>
-            <div className="card" style={{ width: '26rem', margin: '7px' }}>
+            <div className="card"  style={{margin:'8px'}}>
                 <div className="card-body">
                     {props.text}
                     <input className="form-check-input" onFocus='active'
@@ -33,7 +32,6 @@ const Task = (props) => {
                         style={{ float: 'right' }} />
                 </div>
             </div>
-        </Container>
     )
 }
 

@@ -7,15 +7,17 @@ import { useDispatch } from "react-redux"
 import { getAllTask } from "../../store/taskReducer";
 import { useSelector } from "react-redux";
 
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Style from "styled-components";
 
 const Container = Style.div`
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin: auto;
+    width : 100%;
+
+    @media (min-width: 350px) {
+        width: 350px;
+      }
 `
 
 const TaskList = (props) => {
@@ -40,14 +42,12 @@ const TaskList = (props) => {
 
     return (
         <Container>
-            <ul>
                 {tasksList.filter(filterFunk).map((task) => {
                     return <Task key={task.id}
                         text={task.text}
                         isCompleted={task.isCompleted}
                         taskId={task.id} />
                 })}
-            </ul>
         </Container>
     )
 }
