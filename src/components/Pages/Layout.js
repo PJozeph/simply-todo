@@ -2,7 +2,6 @@ import React from "react";
 
 import Header from "../UI/Header/Header";
 
-
 const Layout = (props) => {
     return (
         <React.Fragment>

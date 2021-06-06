@@ -28,9 +28,9 @@ const Login = () => {
         event.preventDefault();
         let url;
         if (isSignUp) {
-            url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDSg1JotvDnX0S3_o1ZgkmtN_SAu0sNuM0'
+            url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_WEB_API_KEY}`
         } else {
-            url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDSg1JotvDnX0S3_o1ZgkmtN_SAu0sNuM0'
+            url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_WEB_API_KEY}`
         }
         axios.post(url,
             {
@@ -42,7 +42,7 @@ const Login = () => {
                 const expirationTime = new Date(new Date().getTime() + (+res.data.expiresIn * 1000));
                 const token = res.data.idToken;
                 const refreshToken = res.data.refreshToken;
-                axios.post("https://securetoken.googleapis.com/v1/token?key=AIzaSyDSg1JotvDnX0S3_o1ZgkmtN_SAu0sNuM0&grant_type=refresh_token&refresh_token="+refreshToken)
+                axios.post(`https://securetoken.googleapis.com/v1/token?key=${process.env.REACT_APP_WEB_API_KEY}` + `&grant_type=refresh_token&refresh_token=`+refreshToken )
                 .then(response => {
                     authContext.login(token, expirationTime, response.data.user_id);
                     history.push("/")

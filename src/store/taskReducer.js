@@ -17,7 +17,7 @@ export const addNewTask = createAsyncThunk(
 export const markTaskCompleted = createAsyncThunk(
     'task/markCompleted',
     async (task) => {
-        const response = await axios.put('https://simply-todo-fd648-default-rtdb.europe-west1.firebasedatabase.app/tasks/' + task.id + '/.json',
+        const response = await axios.put(`${process.env.REACT_APP_DB_URL}` + `/tasks/` + task.id + `/.json`,
             { ...task})
             .then(response => {
                 return {
@@ -33,7 +33,7 @@ export const markTaskCompleted = createAsyncThunk(
 export const getAllTask = createAsyncThunk(
     'task/getAllTask',
     async (obj) => {
-        const response = await axios.get('https://simply-todo-fd648-default-rtdb.europe-west1.firebasedatabase.app/tasks.json?orderBy="userId"&equalTo="'+obj.userId+'"')  
+        const response = await axios.get(`${process.env.REACT_APP_DB_URL}` + `/tasks.json?orderBy="userId"&equalTo="`+ obj.userId +`"`)
             .then(response => {
                 const result = []
                 for (const key in response.data) {

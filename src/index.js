@@ -21,9 +21,7 @@ const Main = (
   <Provider store={store}>
     <AuthContextProvider>
       <BrowserRouter>
-        <Container>
           <App />
-        </Container>
       </BrowserRouter>
     </AuthContextProvider>
   </Provider>
