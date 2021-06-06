@@ -5,7 +5,7 @@ import { Route, Switch } from "react-router-dom";
 import TaskList from "./components/Task/TaskList";
 import Login from "./components/Pages/Auth";
 import Layout from "./components/Pages/Layout";
-import Input from "./components/UI/Input"
+import Input from "./components/Task/Input"
 
 import classes from "./App.module.css"
 
