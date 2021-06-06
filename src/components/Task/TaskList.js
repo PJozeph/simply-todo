@@ -18,7 +18,6 @@ const Container = Style.div`
     margin: auto;
 `
 
-
 const TaskList = (props) => {
 
     const context = useContext(AuthContext);
