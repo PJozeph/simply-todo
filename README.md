@@ -7,5 +7,5 @@ The app is a web application where users are able to track their daily tasks.
   -allow email authentication within firebase project <br/>
   
 # Environment Variables
-REACT_APP_DB_URL='your realtime db url'
-REACT_APP_WEB_API_KEY=<your web api key>
+REACT_APP_DB_URL = `your realtime db url` <br/>
+REACT_APP_WEB_API_KEY = `your web api key`
