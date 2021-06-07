@@ -22,16 +22,16 @@ const Task = (props) => {
     }
 
     return (
-            <div className="card"  style={{margin:'8px'}}>
-                <div className="card-body">
-                    {props.text}
-                    <input className="form-check-input" onFocus='active'
-                        type="checkbox"
-                        checked={props.isCompleted}
-                        onChange={() => taskChangeHandler(props.taskId, props.text, !props.isCompleted)}
-                        style={{ float: 'right' }} />
-                </div>
+        <div className="card" style={{ margin: '8px' }}>
+            <div className="card-body">
+                {props.text}
+                <input className="form-check-input" onFocus='active'
+                    type="checkbox"
+                    checked={props.isCompleted}
+                    onChange={() => taskChangeHandler(props.taskId, props.text, !props.isCompleted)}
+                    style={{ float: 'right' }} />
             </div>
+        </div>
     )
 }
 
