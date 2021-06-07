@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
-import AuthContext from "../../../store/authStore";
 
-import { useContext } from "react";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import Stlye from "styled-components";
 
@@ -10,12 +9,10 @@ const Container = Stlye.header``
 
 const Header = () => {
 
-    const authContext = useContext(AuthContext);
-    const isLoggedIn = authContext.isLoggedIn;
+    const isLoggedIn =  useSelector(state => state.auth.isLoggedin);
     const history = useHistory()
 
     const logoutHandler = () => {
-        authContext.logout();
         history.push("/")
     }
 

@@ -4,7 +4,7 @@ import axios from "axios"
 
 const initialState = { 
     token : '',
-    isloggedin : false,
+    isLoggedin : false,
     email: '',
     userId: ''
  };
@@ -18,14 +18,14 @@ const initialState = {
                 password: password,
                 returnSecureToken: true
             })
-            .then(res => {
-                const expirationTime = new Date(new Date().getTime() + (+res.data.expiresIn * 1000));
-                const token = res.data.idToken;
-                const  userId = res.data.localId;
+            .then(response => {
+                const expirationTime = new Date(new Date().getTime() + (+response.data.expiresIn * 1000));
+                const token = response.data.idToken;
+                const  userId = response.data.localId;
                 localStorage.setItem("expirationTime", expirationTime);
                 localStorage.setItem("token", token);
                 localStorage.setItem("userId", userId);
-                return res;
+                return response.data;
             });
             return result;
         }
@@ -34,11 +34,21 @@ const initialState = {
 const authSlice = createSlice({
     name: 'authReducer',
     initialState,
+    reducers : {
+        signOut : (state, action) => {
+            localStorage.removeItem("userId");
+            localStorage.removeItem("token");
+            localStorage.removeItem("expirationTime");
+            state.isLoggedin = false;
+            state.token = '';
+            state.userId = '';
+        }
+    },
     extraReducers: {
         [login.fulfilled] : (state, action) => {
-            state.token = action.payload.data.token;
-            state.userId = action.payload.data.localId;
-            state.isloggedin = true;
+            state.token = action.payload.token;
+            state.userId = action.payload.localId;
+            state.isLoggedin = true;
         }
     }
 })
