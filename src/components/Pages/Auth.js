@@ -3,7 +3,10 @@ import { useHistory } from "react-router-dom"
 import AuthContext from "../../store/authStore";
 import axios from "axios";
 import Style from "styled-components";
-import React from "react";
+
+import { login } from "../../store/authReducer"
+
+import { useDispatch } from "react-redux"
 
 const Container = Style.div`
     display: flex;
@@ -20,6 +23,8 @@ const Login = () => {
     const passwordInputRef = useRef();
     const history = useHistory();
 
+    const dispatch = useDispatch();
+
     const isSignUpHandler = () => {
         setIsSignUp((prevState) => { return !prevState })
     }
@@ -29,25 +34,27 @@ const Login = () => {
         let url;
         if (isSignUp) {
             url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_WEB_API_KEY}`
+
         } else {
             url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_WEB_API_KEY}`
+                    dispatch(login({url : url, email: emailInputRef.current.value, password: passwordInputRef.current.value}))          
         }
-        axios.post(url,
-            {
-                email: emailInputRef.current.value,
-                password: passwordInputRef.current.value,
-                returnSecureToken: true
-            })
-            .then(res => {
-                const expirationTime = new Date(new Date().getTime() + (+res.data.expiresIn * 1000));
-                const token = res.data.idToken;
-                const refreshToken = res.data.refreshToken;
-                axios.post(`https://securetoken.googleapis.com/v1/token?key=${process.env.REACT_APP_WEB_API_KEY}` + `&grant_type=refresh_token&refresh_token=`+refreshToken )
-                .then(response => {
-                    authContext.login(token, expirationTime, response.data.user_id);
-                    history.push("/")
-                });
-            });
+        // axios.post(url,
+        //     {
+        //         email: emailInputRef.current.value,
+        //         password: passwordInputRef.current.value,
+        //         returnSecureToken: true
+        //     })
+        //     .then(res => {
+        //         const expirationTime = new Date(new Date().getTime() + (+res.data.expiresIn * 1000));
+        //         const token = res.data.idToken;
+        //         const refreshToken = res.data.refreshToken;
+        //         axios.post(`https://securetoken.googleapis.com/v1/token?key=${process.env.REACT_APP_WEB_API_KEY}` + `&grant_type=refresh_token&refresh_token=` + refreshToken)
+        //             .then(response => {
+        //                 authContext.login(token, expirationTime, response.data.user_id);
+        //                 history.push("/")
+        //             });
+        //     });
     }
 
     return (
