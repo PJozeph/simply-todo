@@ -35,7 +35,7 @@ const authSlice = createSlice({
     name: 'authReducer',
     initialState,
     reducers : {
-        signOut : (state, action) => {
+        logout : (state, action) => {
             localStorage.removeItem("userId");
             localStorage.removeItem("token");
             localStorage.removeItem("expirationTime");
