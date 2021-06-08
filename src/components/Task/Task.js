@@ -2,8 +2,7 @@ import Style from "styled-components";
 import { useDispatch } from "react-redux";
 import { markTaskCompleted } from "../../store/taskReducer"
 
-import { useContext } from "react";
-import AuthContext from "../../store/authStore";
+import { useSelector } from "react-redux";
 
 const Container = Style.div`
     display: flex;
@@ -14,8 +13,8 @@ const Container = Style.div`
 const Task = (props) => {
 
     const dispatch = useDispatch();
-    const context = useContext(AuthContext);
-    const userId = context.userId;
+    const authStore = useSelector( state=> state.auth)
+    const userId = authStore.userId;
 
     const taskChangeHandler = (taskId, text, isCompleted) => {
         dispatch(markTaskCompleted({ id: taskId, text, isCompleted, userId }))

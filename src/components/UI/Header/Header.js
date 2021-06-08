@@ -1,21 +1,23 @@
 import { Link } from "react-router-dom";
-import AuthContext from "../../../store/authStore";
 
-import { useContext } from "react";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-import Stlye from "styled-components";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../../store/authReducer"
 
-const Container = Stlye.header``
+import Style from "styled-components";
+
+const Container = Style.header``
 
 const Header = () => {
 
-    const authContext = useContext(AuthContext);
-    const isLoggedIn = authContext.isLoggedIn;
-    const history = useHistory()
+    const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+    const history = useHistory();
+    const dispatch = useDispatch();
 
     const logoutHandler = () => {
-        authContext.logout();
+        dispatch(authActions.logout())
         history.push("/")
     }
 
