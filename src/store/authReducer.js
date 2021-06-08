@@ -2,12 +2,17 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import axios from "axios"
 
+const storedToken = localStorage.getItem('token')
+const userIsLoggedIn = !!storedToken
+const userId = localStorage.getItem('userId');
+
 const initialState = { 
-    token : '',
-    isLoggedin : false,
+    token : userIsLoggedIn && storedToken,
+    isLoggedIn : userIsLoggedIn,
     email: '',
-    userId: ''
+    userId: userIsLoggedIn && userId
  };
+
 
  export const login = createAsyncThunk(
      'auth/login',
@@ -39,7 +44,7 @@ const authSlice = createSlice({
             localStorage.removeItem("userId");
             localStorage.removeItem("token");
             localStorage.removeItem("expirationTime");
-            state.isLoggedin = false;
+            state.isLoggedIn = false;
             state.token = '';
             state.userId = '';
         }
@@ -48,7 +53,7 @@ const authSlice = createSlice({
         [login.fulfilled] : (state, action) => {
             state.token = action.payload.token;
             state.userId = action.payload.localId;
-            state.isLoggedin = true;
+            state.isLoggedIn = true;
         }
     }
 })

@@ -1,9 +1,9 @@
-import { useState, useRef, useEffect, useContext } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import { useDispatch } from "react-redux";
 import { addNewTask } from "../../store/taskReducer"
+import {useSelector} from "react-redux";
 
-import AuthContext from "../../store/authStore";
 import React from "react";
 
 import Style from "styled-components";
@@ -16,14 +16,15 @@ const Input = () => {
     const [enteredTask, setEnteredTask] = useState('');
     const [isInputEmpty, seIsInputIsEmpty] = useState(true);
 
+    const authState = useSelector(state => state.auth)
+
     const enteredTaskInput = useRef('');
 
     const dispatch = useDispatch();
 
-    const context = useContext(AuthContext);
 
-    const isLoggedId = context.isLoggedIn;
-    const userId = context.userId;
+    const isLoggedId = authState.isLoggedIn;
+    const userId = authState.userId;
 
     useEffect(() => {
         enteredTask.length === 0 ? seIsInputIsEmpty(true) : seIsInputIsEmpty(false);
@@ -61,7 +62,7 @@ const Input = () => {
 
     let signInMessage = null;
     if(!isLoggedId) {
-        signInMessage = (<div class="alert alert-info" role="alert">
+        signInMessage = (<div className="alert alert-info" role="alert">
                              Signin to create your own tasks!
                         </div>)
     }

@@ -1,6 +1,5 @@
 import Task from "./Task"
 import { useState, useEffect, useContext } from "react";
-import AuthContext from "../../store/authStore";
 import { useDispatch } from "react-redux"
 
 import { getAllTask } from "../../store/taskReducer";
@@ -21,12 +20,12 @@ const Container = Style.div`
 
 const TaskList = (props) => {
 
-    const context = useContext(AuthContext);
+    const authState = useSelector(state => state.auth);
     const [tasks] = useState([]);
     const dispatch = useDispatch();
 
-    const token = context.token;
-    const userId = context.userId;
+    const token = authState.token;
+    const userId = authState.userId;
     const tasksList = useSelector(state => state.todo.tasks)
 
     useEffect(() => {
