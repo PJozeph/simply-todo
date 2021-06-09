@@ -6,10 +6,6 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../../store/authReducer"
 
-import Style from "styled-components";
-
-const Container = Style.header``
-
 const Header = () => {
 
     const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
