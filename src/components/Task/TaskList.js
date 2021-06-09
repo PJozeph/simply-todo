@@ -5,13 +5,12 @@ import { useDispatch } from "react-redux"
 import { getAllTask } from "../../store/taskReducer";
 import { useSelector } from "react-redux";
 
-
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 import Style from "styled-components";
 
 const Container = Style.div`
     width : 100%;
+    height:400px;
+    overflow-y: auto;
 
     @media (min-width: 350px) {
         width: 350px;

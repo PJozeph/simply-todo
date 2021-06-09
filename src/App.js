@@ -1,5 +1,5 @@
 import Style from "styled-components";
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { Route, Switch } from "react-router-dom";
 import TaskList from "./components/Task/TaskList";
@@ -10,7 +10,7 @@ import Input from "./components/Task/Input"
 import { useDispatch } from "react-redux";
 import { authActions } from "./store/authReducer"
 
-import classes from "./App.module.css"
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Container = Style.div`
     display: flex;
