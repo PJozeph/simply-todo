@@ -9,6 +9,8 @@ import Style from "styled-components";
 
 const Container = Style.div`
     width : 100%;
+    height:400px;
+    overflow-y: auto;
 
     @media (min-width: 350px) {
         width: 350px;
