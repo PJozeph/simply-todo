@@ -5,9 +5,6 @@ import { useDispatch } from "react-redux"
 import { getAllTask } from "../../store/taskReducer";
 import { useSelector } from "react-redux";
 
-
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 import Style from "styled-components";
 
 const Container = Style.div`
