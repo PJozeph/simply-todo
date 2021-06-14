@@ -15,15 +15,13 @@ const Input = () => {
 
     const [enteredTask, setEnteredTask] = useState('');
     const [isInputEmpty, seIsInputIsEmpty] = useState(true);
-
-    const authState = useSelector(state => state.auth)
-
+    
     const enteredTaskInput = useRef('');
-
+    
     const dispatch = useDispatch();
-
-
-    const isLoggedId = authState.isLoggedIn;
+    
+    const authState = useSelector(state => state.auth)
+    const isLoggedIn = authState.isLoggedIn;
     const userId = authState.userId;
 
     useEffect(() => {
@@ -36,8 +34,12 @@ const Input = () => {
     }
 
     const addTaskHandler = () => {
-        dispatch(addNewTask({text: enteredTask, isCompleted: false, userId}));
-        setEnteredTask('')
+        if(!isLoggedIn) {
+            alert('Sign in to track you own tasks!')
+        } else {
+            dispatch(addNewTask({text: enteredTask, isCompleted: false, userId}));
+            setEnteredTask('')
+        }
     }
 
     const cancelEventHandler = () => {
@@ -61,7 +63,7 @@ const Input = () => {
     }
 
     let signInMessage = null;
-    if(!isLoggedId) {
+    if(!isLoggedIn) {
         signInMessage = (<div className="alert alert-info" role="alert">
                              Signin to create your own tasks!
                         </div>)

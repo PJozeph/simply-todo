@@ -29,7 +29,7 @@ const TaskList = (props) => {
 
     useEffect(() => {
         dispatch(getAllTask({ token, userId }))
-    }, [tasks])
+    }, [])
 
     let filterFunk = (task => task.isCompleted === false);
 
