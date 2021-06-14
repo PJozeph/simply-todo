@@ -52,6 +52,11 @@ export const getAllTask = createAsyncThunk(
 const todoSlice = createSlice({
     name: 'todoReducer',
     initialState,
+    reducers : {
+        restoreTasks : (state, action) => {
+            state.tasks = [];
+        }
+    },
     extraReducers: {
         [getAllTask.fulfilled]: (state, action) => {
             state.tasks = action.payload;

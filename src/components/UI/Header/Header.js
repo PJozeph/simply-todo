@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 
 import { useDispatch } from "react-redux";
 import { authActions } from "../../../store/authReducer"
+import { todoActions } from "../../../store/taskReducer"
 
 const Header = () => {
 
@@ -14,6 +15,7 @@ const Header = () => {
 
     const logoutHandler = () => {
         dispatch(authActions.logout())
+        dispatch(todoActions.restoreTasks());
         history.push("/")
     }
 
